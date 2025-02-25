@@ -1,40 +1,53 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const cors = require("cors");
+const asyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
 const { dbConnect } = require("./utils/db");
+dotenv.config();
+
 const app = express();
 
-dotenv.config();
-const port = process.env.PORT || 8800;
-
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 
-const { Schema, model } = mongoose;
-const userSchema = new Schema({
-  name: String,
-  age: Number,
-  email: String,
-});
-const User = model("User", userSchema);
+app.use("/image/products", express.static("public/products"));
+app.use("/image/category", express.static("public/category"));
+app.use("/image/poster", express.static("public/posters"));
 
 dbConnect();
 
-app.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const user = await User.findByIdAndDelete(id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.json("Delete successfully");
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error deleting user", error: error.message });
-  }
+// Routes
+app.use("/categories", require("./routes/category"));
+app.use("/subCategories", require("./routes/subCategory"));
+app.use("/brands", require("./routes/brand"));
+app.use("/variantTypes", require("./routes/variantType"));
+app.use("/variants", require("./routes/variant"));
+app.use("/products", require("./routes/product"));
+app.use("/couponCodes", require("./routes/couponCode"));
+app.use("/posters", require("./routes/poster"));
+app.use("/users", require("./routes/user"));
+app.use("/orders", require("./routes/order"));
+app.use("/payment", require("./routes/payment"));
+app.use("/notification", require("./routes/notification"));
+
+// Example route using asyncHandler directly in app.js
+app.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    res.json({
+      success: true,
+      message: "API working successfully",
+      data: null,
+    });
+  })
+);
+
+// Global error handler
+app.use((error, req, res, next) => {
+  res.status(500).json({ success: false, message: error.message, data: null });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on :${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
