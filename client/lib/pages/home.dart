@@ -9,6 +9,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List categories = [
+    "images/headphone_icon.png",
+    "images/laptop.png",
+    "images/watch.png",
+    "images/TV.png"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +51,9 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
             Container(
               padding: EdgeInsets.only(left: 20),
+              margin: EdgeInsets.only(top: 30),
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(10)),
               width: MediaQuery.of(context).size.width,
@@ -62,9 +68,91 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Categories",
+                  style: AppWidget.semiboldTextFieldStyle(),
+                ),
+                Text(
+                  "See all",
+                  style: TextStyle(
+                      color: Color(0xfffd6f3e),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  height: 130,
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Color(0xfffd6f3e),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "All",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, top: 20),
+                    height: 120,
+                    child: ListView.builder(
+                        itemCount: categories.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return CategoryTile(image: categories[index]);
+                        }),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  String image;
+  CategoryTile({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20),
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            image,
+            height: 50,
+            width: 50,
+            fit: BoxFit.cover,
+          ),
+          Icon(Icons.arrow_forward)
+        ],
       ),
     );
   }
