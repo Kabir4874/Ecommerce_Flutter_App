@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
             Row(
               children: [
                 Container(
-                  height: 130,
+                  height: 120,
                   margin: EdgeInsets.only(top: 20),
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -121,6 +121,72 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "All Products",
+                  style: AppWidget.semiboldTextFieldStyle(),
+                ),
+                Text(
+                  "See all",
+                  style: TextStyle(
+                      color: Color(0xfffd6f3e),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Container(
+              height: 190,
+              margin: EdgeInsets.only(top: 30),
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "images/headphone2.png",
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        ),
+                        Text(
+                          "Headphone",
+                          style: AppWidget.semiboldTextFieldStyle(),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "\$100",
+                              style: TextStyle(
+                                color: Color(0xfffd6f3e),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 40),
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xfffd6f3e),
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
