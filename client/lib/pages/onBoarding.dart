@@ -36,8 +36,9 @@ class _OnboardingState extends State<Onboarding> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  decoration: BoxDecoration(color: Colors.black),
-                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: Colors.black, shape: BoxShape.circle),
+                  padding: EdgeInsets.all(25),
                   margin: EdgeInsets.only(right: 20),
                   child: Text(
                     "Next",
