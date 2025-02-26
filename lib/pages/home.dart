@@ -197,7 +197,7 @@ class _HomeState extends State<Home> {
 
 class CategoryTile extends StatelessWidget {
   String image;
-  CategoryTile({required this.image});
+  CategoryTile({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
