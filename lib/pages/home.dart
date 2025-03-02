@@ -44,8 +44,8 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(
                     "images/boy.jpg",
-                    height: 70,
-                    width: 70,
+                    height: 50,
+                    width: 50,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -147,8 +147,11 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   Container(
+                    margin: EdgeInsets.only(right: 20),
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(color: Colors.white),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       children: [
                         Image.asset(
@@ -187,7 +190,51 @@ class _HomeState extends State<Home> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "images/watch2.png",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                        Text(
+                          "Apple Watch",
+                          style: AppWidget.semiboldTextFieldStyle(),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text(
+                              "\$300",
+                              style: TextStyle(
+                                color: Color(0xfffd6f3e),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 40),
+                            Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Color(0xfffd6f3e),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
