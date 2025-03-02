@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             Container(
-              height: 190,
+              height: 240,
               margin: EdgeInsets.only(top: 30),
               child: ListView(
                 shrinkWrap: true,
@@ -153,14 +153,15 @@ class _HomeState extends State<Home> {
                       children: [
                         Image.asset(
                           "images/headphone2.png",
-                          height: 120,
-                          width: 120,
+                          height: 150,
+                          width: 150,
                           fit: BoxFit.cover,
                         ),
                         Text(
                           "Headphone",
                           style: AppWidget.semiboldTextFieldStyle(),
                         ),
+                        SizedBox(height: 10),
                         Row(
                           children: [
                             Text(
@@ -173,8 +174,10 @@ class _HomeState extends State<Home> {
                             ),
                             SizedBox(width: 40),
                             Container(
+                                padding: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                   color: Color(0xfffd6f3e),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Icon(
                                   Icons.add,
