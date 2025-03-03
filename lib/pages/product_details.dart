@@ -90,4 +90,3 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 }
-
