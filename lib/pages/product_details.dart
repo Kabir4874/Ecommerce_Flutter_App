@@ -80,6 +80,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                     SizedBox(height: 10),
                     Text(
                         "Product is very good. It have 1 year warranty. These headphones are too good like you can also listened a person who is peaking slowly. But be aware of who speak loudly."),
+                    SizedBox(height: 90),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xfffd6f3e),
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text(
+                          "Buy Now",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
