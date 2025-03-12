@@ -26,14 +26,27 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
-              'Please enter the details below to\n                     continue',
-              style: AppWidget.lightTextFieldStyle(),
+            Center(
+              child: Text(
+                'Please enter the details below to\n                     continue',
+                style: AppWidget.lightTextFieldStyle(),
+              ),
             ),
             SizedBox(height: 20),
             Text(
               'Email',
               style: AppWidget.semiboldTextFieldStyle(),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              decoration: BoxDecoration(
+                  color: Color(0xfff4f5f9),
+                  borderRadius: BorderRadius.circular(10)),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Email'),
+              ),
             )
           ],
         ),
