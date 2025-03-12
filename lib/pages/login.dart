@@ -15,16 +15,22 @@ class _LoginState extends State<Login> {
       body: Container(
         margin: EdgeInsets.only(top: 40, left: 20, right: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset('images/login.png'),
-            Text(
-              'Sign In',
-              style: AppWidget.semiboldTextFieldStyle(),
+            SizedBox(height: 10),
+            Center(
+              child: Text(
+                'Sign In',
+                style: AppWidget.semiboldTextFieldStyle(),
+              ),
             ),
+            SizedBox(height: 20),
             Text(
               'Please enter the details below to\n                     continue',
               style: AppWidget.lightTextFieldStyle(),
             ),
+            SizedBox(height: 20),
             Text(
               'Email',
               style: AppWidget.semiboldTextFieldStyle(),
