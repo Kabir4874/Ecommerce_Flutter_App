@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                 padding: EdgeInsets.all(18),
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Text(
                   'LOGIN',
                   style: TextStyle(
@@ -92,6 +92,24 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Don't have an account?",
+                  style: AppWidget.lightTextFieldStyle(),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
             )
           ],
         ),
