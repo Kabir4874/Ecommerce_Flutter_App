@@ -1,3 +1,4 @@
+import 'package:client/pages/register.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -102,12 +103,18 @@ class _LoginState extends State<Login> {
                   style: AppWidget.lightTextFieldStyle(),
                 ),
                 SizedBox(width: 10),
-                Text(
-                  'Sign Up',
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Register()));
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ],
             )
