@@ -1,4 +1,3 @@
-import 'package:client/pages/login.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -107,18 +106,12 @@ class _RegisterState extends State<Register> {
                     style: AppWidget.lightTextFieldStyle(),
                   ),
                   SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    },
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
+                  Text(
+                    'Sign In',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               )
