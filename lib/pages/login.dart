@@ -1,5 +1,7 @@
+import 'package:client/pages/home.dart';
 import 'package:client/pages/register.dart';
 import 'package:client/widget/support_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,6 +12,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String email = "", password = "";
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  useLogin() async{
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
