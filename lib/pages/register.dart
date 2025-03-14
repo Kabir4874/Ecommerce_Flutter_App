@@ -42,7 +42,6 @@ class _RegisterState extends State<Register> {
 
   registration() async {
     if (password != null && name != null && email != null) {
-      // Validate email and password
       if (!isValidEmail(email!)) {
         showSnackBar(context, 'Invalid email format!');
         return;
@@ -56,14 +55,12 @@ class _RegisterState extends State<Register> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email!, password: password!);
-        print('user credential $userCredential');
         if (mounted) {
           showSnackBar(context, 'Registered Successfully!');
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => BottomNav()));
         }
 
-        // Save additional user data (optional)
         if (userCredential.user != null) {
           await FirebaseFirestore.instance
               .collection('users')
