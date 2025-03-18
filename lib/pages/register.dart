@@ -1,7 +1,7 @@
 import 'package:client/pages/bottomnav.dart';
 import 'package:client/pages/login.dart';
+import 'package:client/services/database.dart';
 import 'package:client/widget/support_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -62,13 +62,14 @@ class _RegisterState extends State<Register> {
         }
 
         if (userCredential.user != null) {
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(userCredential.user!.uid)
-              .set({
-            'name': name,
-            'email': email,
-          });
+          Map<String, dynamic> userInfoMap = {
+            "Name": nameController.text,
+            "Email": emailController.text,
+            "Id": userCredential.user!.uid,
+            "Image": ""
+          };
+          await DatabaseMethods()
+              .addUserDetails(userInfoMap, userCredential.user!.uid);
         }
       } on FirebaseException catch (e) {
         String errorMessage = 'An error occurred. Please try again.';
