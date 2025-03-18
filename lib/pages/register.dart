@@ -1,6 +1,7 @@
 import 'package:client/pages/bottomnav.dart';
 import 'package:client/pages/login.dart';
 import 'package:client/services/database.dart';
+import 'package:client/services/shared_pref.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,10 @@ class _RegisterState extends State<Register> {
         }
 
         if (userCredential.user != null) {
+          await SharedPreferenceHelper().saveUserEmail(emailController.text);
+          await SharedPreferenceHelper().saveUserId(userCredential.user!.uid);
+          await SharedPreferenceHelper().saveUserName(nameController.text);
+          await SharedPreferenceHelper().saveUserImage("");
           Map<String, dynamic> userInfoMap = {
             "Name": nameController.text,
             "Email": emailController.text,
