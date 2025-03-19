@@ -1,3 +1,4 @@
+import 'package:client/admin/home_admin.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -97,10 +98,22 @@ class _AdminLoginState extends State<AdminLogin> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.redAccent,
             content: Text(
-              "Your id is not correct",
+              "Your username is not correct",
               style: TextStyle(fontSize: 20),
             ),
           ));
+        } else if (result.data()['password'] !=
+            userPasswordController.text.trim()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "Your password is not correct",
+              style: TextStyle(fontSize: 20),
+            ),
+          ));
+        } else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         }
       });
     });
