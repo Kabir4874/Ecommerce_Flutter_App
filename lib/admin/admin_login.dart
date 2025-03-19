@@ -68,6 +68,9 @@ class _AdminLoginState extends State<AdminLogin> {
               ),
               Center(
                 child: GestureDetector(
+                  onTap: () {
+                    loginAdmin();
+                  },
                   child: Container(
                     margin: EdgeInsets.only(top: 30),
                     padding: EdgeInsets.all(18),
