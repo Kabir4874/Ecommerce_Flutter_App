@@ -1,4 +1,5 @@
 import 'package:client/widget/support_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AdminLogin extends StatefulWidget {
@@ -87,5 +88,21 @@ class _AdminLoginState extends State<AdminLogin> {
         ),
       ),
     );
+  }
+
+  loginAdmin() {
+    FirebaseFirestore.instance.collection('admins').get().then((snapshot) {
+      snapshot.docs.forEach((result) {
+        if (result.data()['username'] != usernameController.text.trim()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "Your id is not correct",
+              style: TextStyle(fontSize: 20),
+            ),
+          ));
+        }
+      });
+    });
   }
 }
