@@ -103,14 +103,16 @@ class _AddProductState extends State<AddProduct> {
               ),
             ),
             SizedBox(height: 40),
-            ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Add Product',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                ))
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Add Product',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  )),
+            )
           ],
         ),
       ),
