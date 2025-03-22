@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:client/services/database.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,19 @@ class _AddProductState extends State<AddProduct> {
         "Name": nameController.text,
         "Image": downloadUrl,
       };
+      await DatabaseMethods().addProduct(addProduct, value!).then((value) {
+        selectedImage = null;
+        nameController.text = "";
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              'Product added successfully',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        );
+      });
     }
   }
 
@@ -146,7 +160,9 @@ class _AddProductState extends State<AddProduct> {
             SizedBox(height: 40),
             Center(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    uploadItem();
+                  },
                   child: Text(
                     'Add Product',
                     style: TextStyle(
