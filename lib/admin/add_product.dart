@@ -182,15 +182,16 @@ class _AddProductState extends State<AddProduct> {
             SizedBox(height: 40),
             Center(
               child: ElevatedButton(
-                  onPressed: () {
-                    uploadItem();
-                  },
-                  child: Text(
-                    'Add Product',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  )),
+                onPressed: () {
+                  uploadItem();
+                },
+                child: Text(
+                  'Add Product',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ),
             )
           ],
         ),
