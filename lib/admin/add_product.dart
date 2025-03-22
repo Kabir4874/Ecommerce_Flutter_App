@@ -90,17 +90,39 @@ class _AddProductState extends State<AddProduct> {
               style: AppWidget.lightTextFieldStyle(),
             ),
             SizedBox(height: 20),
-            Center(
-              child: Container(
-                height: 150,
-                width: 150,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Icon(Icons.camera_alt_outlined),
-              ),
-            ),
+            selectedImage == null
+                ? GestureDetector(
+                    onTap: () {
+                      getImage();
+                    },
+                    child: Center(
+                      child: Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(Icons.camera_alt_outlined),
+                      ),
+                    ),
+                  )
+                : Material(
+                    elevation: 4,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Image.file(
+                        selectedImage!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
             SizedBox(height: 40),
             Text(
               "Product name",
