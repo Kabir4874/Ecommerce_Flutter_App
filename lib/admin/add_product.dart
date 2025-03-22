@@ -1,5 +1,10 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:client/widget/support_widget.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -9,6 +14,41 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
+  final ImagePicker _picker = ImagePicker();
+  File? selectedImage;
+  TextEditingController nameController = TextEditingController();
+
+  Future getImage() async {
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    selectedImage = File(image!.path);
+    setState(() {});
+  }
+
+  String randomAlphaNumeric(int length) {
+    const characters =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    Random random = Random();
+    return List.generate(length, (index) {
+      return characters[random.nextInt(characters.length)];
+    }).join();
+  }
+
+  uploadItem() async {
+    if (selectedImage != null && nameController.text != '') {
+      String addId = randomAlphaNumeric(10);
+      Reference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child('blogImage').child(addId);
+
+      final UploadTask task = firebaseStorageRef.putFile(selectedImage!);
+      var downloadUrl = await (await task).ref.getDownloadURL();
+
+      Map<String, dynamic> addProduct = {
+        "Name": nameController.text,
+        "Image": downloadUrl,
+      };
+    }
+  }
+
   String? value;
   final List<String> categoryItem = ['Watch', 'Laptop', 'TV', "Headphones"];
   @override
@@ -60,6 +100,7 @@ class _AddProductState extends State<AddProduct> {
                   color: Color(0xffececf8),
                   borderRadius: BorderRadius.circular(20)),
               child: TextField(
+                controller: nameController,
                 decoration: InputDecoration(border: InputBorder.none),
               ),
             ),
