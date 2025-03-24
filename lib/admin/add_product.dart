@@ -18,6 +18,8 @@ class _AddProductState extends State<AddProduct> {
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
   TextEditingController nameController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController detailController = TextEditingController();
 
   Future getImage() async {
     var image = await _picker.pickImage(source: ImageSource.gallery);
@@ -80,120 +82,162 @@ class _AddProductState extends State<AddProduct> {
           style: AppWidget.semiboldTextFieldStyle(),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.only(left: 20, top: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Upload the product Image",
-              style: AppWidget.lightTextFieldStyle(),
-            ),
-            SizedBox(height: 20),
-            selectedImage == null
-                ? GestureDetector(
-                    onTap: () {
-                      getImage();
-                    },
-                    child: Center(
-                      child: Container(
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Icon(Icons.camera_alt_outlined),
-                      ),
-                    ),
-                  )
-                : Material(
-                    elevation: 4,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1.5),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.file(
-                        selectedImage!,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-            SizedBox(height: 40),
-            Text(
-              "Product name",
-              style: AppWidget.lightTextFieldStyle(),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Color(0xffececf8),
-                  borderRadius: BorderRadius.circular(20)),
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(border: InputBorder.none),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Upload The Product Image",
+                style: AppWidget.lightTextFieldStyle(),
               ),
-            ),
-            SizedBox(height: 40),
-            Text(
-              "Product category",
-              style: AppWidget.lightTextFieldStyle(),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Color(0xffececf8),
-                  borderRadius: BorderRadius.circular(10)),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  onChanged: (value) => setState(() {
-                    this.value = value;
-                  }),
-                  dropdownColor: Colors.white,
-                  hint: Text("Select Category"),
-                  iconSize: 36,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.black,
-                  ),
-                  value: value,
-                  items: categoryItem
-                      .map(
-                        (item) => DropdownMenuItem(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: AppWidget.semiboldTextFieldStyle(),
+              SizedBox(height: 20),
+              selectedImage == null
+                  ? GestureDetector(
+                      onTap: () {
+                        getImage();
+                      },
+                      child: Center(
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Icon(Icons.camera_alt_outlined),
+                        ),
+                      ),
+                    )
+                  : Center(
+                      child: Material(
+                        elevation: 4,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.file(
+                              selectedImage!,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      )
-                      .toList(),
+                      ),
+                    ),
+              SizedBox(height: 40),
+              Text(
+                "Product Name",
+                style: AppWidget.lightTextFieldStyle(),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Color(0xffececf8),
+                    borderRadius: BorderRadius.circular(20)),
+                child: TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(border: InputBorder.none),
                 ),
               ),
-            ),
-            SizedBox(height: 40),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  uploadItem();
-                },
-                child: Text(
-                  'Add Product',
-                  style: TextStyle(
-                    fontSize: 22,
+              SizedBox(height: 40),
+              Text(
+                "Product Price",
+                style: AppWidget.lightTextFieldStyle(),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Color(0xffececf8),
+                    borderRadius: BorderRadius.circular(20)),
+                child: TextField(
+                  controller: priceController,
+                  decoration: InputDecoration(border: InputBorder.none),
+                ),
+              ),
+              SizedBox(height: 40),
+              Text(
+                "Product Detail",
+                style: AppWidget.lightTextFieldStyle(),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Color(0xffececf8),
+                    borderRadius: BorderRadius.circular(20)),
+                child: TextField(
+                  maxLines: 6,
+                  controller: priceController,
+                  decoration: InputDecoration(border: InputBorder.none),
+                ),
+              ),
+              SizedBox(height: 40),
+              Text(
+                "Product Category",
+                style: AppWidget.lightTextFieldStyle(),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Color(0xffececf8),
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    onChanged: (value) => setState(() {
+                      this.value = value;
+                    }),
+                    dropdownColor: Colors.white,
+                    hint: Text("Select Category"),
+                    iconSize: 36,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                    ),
+                    value: value,
+                    items: categoryItem
+                        .map(
+                          (item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: AppWidget.semiboldTextFieldStyle(),
+                            ),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               ),
-            )
-          ],
+              SizedBox(height: 40),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    uploadItem();
+                  },
+                  child: Text(
+                    'Add Product',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
