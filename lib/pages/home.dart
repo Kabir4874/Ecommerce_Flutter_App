@@ -1,3 +1,4 @@
+import 'package:client/pages/category_products.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _HomeState extends State<Home> {
     "images/watch.png",
     "images/TV.png"
   ];
+  List CategoryName = ["headphones", "laptop", 'watch', "tv"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +118,10 @@ class _HomeState extends State<Home> {
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return CategoryTile(image: categories[index]);
+                          return CategoryTile(
+                            image: categories[index],
+                            name: CategoryName[index],
+                          );
                         }),
                   ),
                 ),
@@ -246,14 +251,17 @@ class _HomeState extends State<Home> {
 }
 
 class CategoryTile extends StatelessWidget {
-  String image;
-  CategoryTile({super.key, required this.image});
+  String image, name;
+  CategoryTile({super.key, required this.image, required this.name});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryProducts(category: name)));
       },
       child: Container(
         margin: EdgeInsets.only(right: 20),

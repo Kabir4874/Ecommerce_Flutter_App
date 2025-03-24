@@ -1,16 +1,29 @@
+import 'package:client/services/database.dart';
 import 'package:client/widget/support_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CategoryProducts extends StatefulWidget {
-  const CategoryProducts({super.key});
-
+  String category;
+  CategoryProducts({required this.category});
   @override
   State<CategoryProducts> createState() => _CategoryProductsState();
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
   Stream? CategoryStream;
+
+  getOnTheLoad() async {
+    CategoryStream = await DatabaseMethods().getProducts(widget.category);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getOnTheLoad();
+    super.initState();
+  }
+
   Widget allProducts() {
     return StreamBuilder(
         stream: CategoryStream,
@@ -27,34 +40,37 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   itemBuilder: (context, index) {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
                       child: Column(
                         children: [
-                          Image.asset(
-                            "images/watch2.png",
+                          SizedBox(height: 10),
+                          Image.network(
+                            ds["Image"],
                             height: 150,
                             width: 150,
                             fit: BoxFit.cover,
                           ),
+                          SizedBox(height: 10),
                           Text(
-                            "Apple Watch",
+                            ds["Name"],
                             style: AppWidget.semiboldTextFieldStyle(),
                           ),
-                          SizedBox(height: 10),
+                          Spacer(),
                           Row(
                             children: [
                               Text(
-                                "\$300",
+                                "\$" + ds["Price"],
                                 style: TextStyle(
                                   color: Color(0xfffd6f3e),
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 40),
+                              SizedBox(width: 60),
                               Container(
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
@@ -83,8 +99,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
         backgroundColor: Color(0xfff2f2f2),
       ),
       body: Container(
+        margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(
-          children: [],
+          children: [Expanded(child: allProducts())],
         ),
       ),
     );
