@@ -48,6 +48,8 @@ class _AddProductState extends State<AddProduct> {
       Map<String, dynamic> addProduct = {
         "Name": nameController.text,
         "Image": downloadUrl,
+        "Price": priceController.text,
+        "Detail": detailController.text,
       };
       await DatabaseMethods().addProduct(addProduct, value!).then((value) {
         selectedImage = null;
@@ -179,7 +181,7 @@ class _AddProductState extends State<AddProduct> {
                     borderRadius: BorderRadius.circular(20)),
                 child: TextField(
                   maxLines: 6,
-                  controller: priceController,
+                  controller: detailController,
                   decoration: InputDecoration(border: InputBorder.none),
                 ),
               ),
