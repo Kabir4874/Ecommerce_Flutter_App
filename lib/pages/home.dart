@@ -251,24 +251,29 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 20),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            image,
-            height: 50,
-            width: 50,
-            fit: BoxFit.cover,
-          ),
-          Icon(Icons.arrow_forward)
-        ],
+    return GestureDetector(
+      onTap: (){
+        
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 20),
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              image,
+              height: 50,
+              width: 50,
+              fit: BoxFit.cover,
+            ),
+            Icon(Icons.arrow_forward)
+          ],
+        ),
       ),
     );
   }
